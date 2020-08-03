@@ -5,11 +5,14 @@ Ubuntu Autoinstall Scripts
 August 2020
 
 **Ubuntu Server Version:** 20.04
+**Default Username:** `setup`
 **Default Password:** `setup`
 **Default Encryption Key:** `setup`
 
 Description
 -----------
+* `user-data-base`: Basic autoinstall file that configures a server
+   for SSH and used the default partition scheme.
 
 Build
 -----

@@ -1,0 +1,15 @@
+#cloud-config
+autoinstall:
+  version: 1
+  refresh-installer:
+    update: yes
+  identity:
+    hostname: newserver
+    password: "$6$.SAlxBpn2Ch0I$dPF3313pydThKpTXoHH/2aebmxilJVkPSMXtE8ZDG4rQTakd2VQTNZHKCVYRcPvzzCF3DX49hQr114jKYo7De."
+    realname: 'setup'
+    username: setup
+  ssh:
+    install-server: yes
+    allow-pw: no
+    authorized-keys:
+      - "ADD KEY HERE"
