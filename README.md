@@ -4,10 +4,10 @@ Ubuntu Autoinstall Scripts
 [Andy Sayler](https://www.andysayler.com)
 August 2020
 
-**Ubuntu Server Version:** 20.04
-**Default Username:** `setup`
-**Default Password:** `setup`
-**Default Encryption Key:** `setup`
+* **Ubuntu Server Version:** 20.04
+* **Default Username:** `setup`
+* **Default Password:** `setup`
+* **Default Encryption Key:** `setup`
 
 Description
 -----------
