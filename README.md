@@ -16,8 +16,8 @@ Description
 
 Build
 -----
-1. Customize appropriate `user-data` file as needed
-2. Build cloudinit iso: `cloud-localds ./autoinstall.iso ./user-data ./meta-data`
+1. Customize appropriate `user-data-XXXX` file as needed
+2. Build cloudinit iso: `cloud-localds ./autoinstall.iso ./user-data-XXXX ./meta-data`
 3. Mount both `autoinstall.iso` and [Ubuntu 20.04 server iso](https://releases.ubuntu.com/20.04/)
 4. Boot system to Ubuntu server installer and select `yes` when prompted to start autoinstall
 5. Profit
