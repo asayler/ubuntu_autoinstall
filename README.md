@@ -1,7 +1,7 @@
 Ubuntu Autoinstall Scripts
 ==========================
 
-[Andy Sayler](https://www.andysayler.com)
+By [Andy Sayler](https://www.andysayler.com)\
 August 2020
 
 * **Ubuntu Server Version:** 20.04
