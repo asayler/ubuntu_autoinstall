@@ -11,11 +11,11 @@ August 2020
 
 Contents
 --------
-* `user-data-base`: Basic autoinstall file that configures a server
+* [user-data-base]: Basic autoinstall file that configures a server
   for SSH and used the default partition scheme.
-* `user-data-storage`: Builds on `user-data-basic` to define a custom
+* [user-data-storage]: Builds on `user-data-basic` to define a custom
   partition scheme for the first NVMe device on the system.
-* `user-data-encrypted`: Builds on `user-data-storage` to add LUKS
+* [user-data-encrypted]: Builds on `user-data-storage` to add LUKS
   full disk encryption to the partition scheme. **NOTE: change the LUKS
   password after first boot. Default LUKS password is above.**
 
