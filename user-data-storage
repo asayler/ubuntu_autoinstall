@@ -1,0 +1,73 @@
+#cloud-config
+autoinstall:
+  version: 1
+  refresh-installer:
+    update: yes
+  identity:
+    hostname: newserver
+    password: "$6$.SAlxBpn2Ch0I$dPF3313pydThKpTXoHH/2aebmxilJVkPSMXtE8ZDG4rQTakd2VQTNZHKCVYRcPvzzCF3DX49hQr114jKYo7De."
+    realname: 'setup'
+    username: setup
+  ssh:
+    install-server: yes
+    allow-pw: no
+    authorized-keys:
+      - "ADD KEY HERE"
+  storage:
+    config:
+      - id: disk-system
+        type: disk
+        match:
+          path: /dev/nvme0n1
+        ptable: gpt
+        wipe: superblock
+        name: system
+      - id: part-efi
+        type: partition
+        device: disk-system
+        number: 1
+        size: 1G
+        wipe: superblock
+        flag: boot
+        grub_device: true
+      - id: part-boot
+        type: partition
+        device: disk-system
+        number: 2
+        size: 9G
+        wipe: superblock
+      - id: part-root
+        type: partition
+        device: disk-system
+        number: 3
+        size: 32G
+        wipe: superblock
+      - id: format-efi
+        type: format
+        volume: part-efi
+        fstype: fat32
+        label: efi
+      - id: format-boot
+        type: format
+        volume: part-boot
+        fstype: btrfs
+        label: boot
+      - id: format-root
+        type: format
+        volume: part-root
+        fstype: btrfs
+        label: root
+      - id: mount-root
+        type: mount
+        device: format-root
+        path: /
+        options: 'defaults,relatime,compress=lzo,ssd,discard,space_cache,autodefrag'        
+      - id: mount-boot
+        type: mount
+        device: format-boot
+        path: /boot
+        options: 'defaults,relatime,compress=lzo,ssd,discard,space_cache,autodefrag'
+      - id: mount-efi
+        type: mount
+        device: format-efi
+        path: /boot/efi
