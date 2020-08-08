@@ -18,14 +18,17 @@ Contents
   the system.
 * [user-data-encrypted](user-data-encrypted): Builds on
   `user-data-storage` to add LUKS full disk encryption to the
-  partition scheme. **NOTE: change the LUKS password after first
-  boot. Default LUKS password is above.**
+  partition scheme. **NOTE: Please change the LUKS password after
+  first boot. Default LUKS password is above.**
 
 Build
 -----
 1. Customize appropriate `user-data-XXXX` file as needed
 2. Build cloudinit iso: `cloud-localds ./autoinstall.iso ./user-data-XXXX ./meta-data`
-3. Mount both `autoinstall.iso` and [Ubuntu 20.04 server iso](https://releases.ubuntu.com/20.04/)
+3. Mount both `autoinstall.iso` and [Ubuntu 20.04 server.iso](https://releases.ubuntu.com/20.04/)
+(I tend to use the IPMI console to do this on headless servers,
+but doing it via VM commands or actual media on a physical server
+should all work as well.)
 4. Boot system to Ubuntu server installer and select `yes` when prompted to start autoinstall
 5. Profit
 
