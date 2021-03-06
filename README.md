@@ -32,6 +32,10 @@ should all work as well.)
 4. Boot system to Ubuntu server installer and select `yes` when prompted to start autoinstall
 5. Profit
 
+Notes
+-----
+* Generate Crypted Password: `python3 -c "import crypt;print(crypt.crypt(input('clear-text pw: '), crypt.mksalt(crypt.METHOD_SHA512)))"`
+
 References
 ----------
 * https://ubuntu.com/server/docs/install/autoinstall
