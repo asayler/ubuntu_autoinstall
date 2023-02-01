@@ -61,12 +61,12 @@ autoinstall:
         type: mount
         device: format-root
         path: /
-        options: 'defaults,relatime,compress=lzo,ssd,discard,space_cache,autodefrag'        
+        options: 'defaults,relatime,compress=lzo,ssd,discard,autodefrag'
       - id: mount-boot
         type: mount
         device: format-boot
         path: /boot
-        options: 'defaults,relatime,compress=lzo,ssd,discard,space_cache,autodefrag'
+        options: 'defaults,relatime,compress=lzo,ssd,discard,autodefrag'
       - id: mount-efi
         type: mount
         device: format-efi
