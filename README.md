@@ -2,9 +2,9 @@ Ubuntu Autoinstall Scripts
 ==========================
 
 By [Andy Sayler](https://www.andysayler.com)\
-August 2020
+Feburary 2022
 
-* **Ubuntu Server Version:** 20.04
+* **Ubuntu Server Version:** 22.04 (previously tested with 20.04)
 * **Default Username:** `setup`
 * **Default Password:** `setup`
 * **Default Encryption Key:** `setup`
@@ -25,7 +25,7 @@ Build
 -----
 1. Customize appropriate `user-data-XXXX` file as needed
 2. Build cloudinit iso: `cloud-localds ./autoinstall.iso ./user-data-XXXX ./meta-data`
-3. Mount both `autoinstall.iso` and [Ubuntu 20.04 server.iso](https://releases.ubuntu.com/20.04/)
+3. Mount both `autoinstall.iso` and [Ubuntu 22.04 server.iso](https://releases.ubuntu.com/22.04/)
 (I tend to use the IPMI console to do this on headless servers,
 but doing it via VM commands or actual media on a physical server
 should all work as well.)
