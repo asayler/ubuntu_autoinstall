@@ -29,11 +29,11 @@ jobs:
           sudo apt-get install -y $(cat apt-deps.txt)
           make gitdeps
       - name: Validate autoinstall files
-        working-directory: repo
+        working-directory: subiquity
         run: |
           set -e
-          for f in user-data-*; do
+          for f in ../repo/user-data-*; do
             echo "::group::Validating $f"
-            ../subiquity/scripts/validate-autoinstall-user-data.py --json-schema ../subiquity/autoinstall-schema.json "$f"
+            ./scripts/validate-autoinstall-user-data.py "$f"
             echo "::endgroup::"
           done
