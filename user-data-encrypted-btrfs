@@ -66,7 +66,7 @@ autoinstall:
         type: mount
         device: format-root
         path: /
-        options: 'defaults,relatime,compress=lzo,ssd,discard,autodefrag'        
+        options: 'defaults,relatime,compress=lzo,ssd,discard,autodefrag'
       - id: mount-boot
         type: mount
         device: format-boot

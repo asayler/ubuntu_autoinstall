@@ -15,20 +15,24 @@ Contents
 --------
 * [user-data-base](user-data-base): Basic autoinstall file that
   configures a server for SSH and used the default partition scheme.
-* [user-data-storage](user-data-storage): Builds on `user-data-basic`
-  to define a custom partition scheme for the first NVMe device on
-  the system.
-* [user-data-encrypted](user-data-encrypted): Builds on
+* [user-data-storage-btrfs](user-data-storage-btrfs): Builds on
+  `user-data-basic` to define a custom partition scheme for the
+  first NVMe device on the system using the btrfa filesystem.
+* [user-data-encrypted-btrfs](user-data-encrypted-btrfs): Builds on
   `user-data-storage` to add LUKS full disk encryption to the
   partition scheme. **NOTE: Please change the LUKS password after
   first boot. Default LUKS password is above.**
-* [user-data-encrypted-zfs](user-data-encrypted-zfs): Alternate to
-  `user-data-encrypted` using the guided ZFS layout with native ZFS
+* [user-data-encrypted-ext4](user-data-encrypted-ext4): Same as the
+  previous version, but using ext4 instead of btrfs.  **NOTE: Please
+  change the LUKS password after first boot. Default LUKS password is
+  above.**
+* [user-data-encrypted-zfs-auto](user-data-encrypted-zfs-auto): Alternate to
+  `user-data-encrypted-btrfs` using the guided ZFS layout with native ZFS
   encryption instead of manual LUKS partitioning. **NOTE: Please
   change the encryption passphrase after first boot. Default
   passphrase is above.** (**UNTESTED**)
 * [user-data-encrypted-zfs-manual](user-data-encrypted-zfs-manual):
-  Same encrypted-ZFS scheme as `user-data-encrypted-zfs`, but built
+  Same encrypted-ZFS scheme as the previous version, but built
   from low-level `zpool`/`zfs` storage actions on a fixed partition
   layout instead of the guided layout. **NOTE: Please change the
   encryption passphrase after first boot. Default passphrase is
