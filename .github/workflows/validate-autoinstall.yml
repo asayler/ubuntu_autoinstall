@@ -34,6 +34,6 @@ jobs:
           set -e
           for f in user-data-*; do
             echo "::group::Validating $f"
-            ../subiquity/scripts/validate-autoinstall-user-data.py "$f"
+            ../subiquity/scripts/validate-autoinstall-user-data.py --json-schema ../subiquity/autoinstall-schema.json "$f"
             echo "::endgroup::"
           done
