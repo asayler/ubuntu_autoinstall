@@ -4,6 +4,8 @@ Ubuntu Autoinstall Scripts
 By [Andy Sayler](https://www.andysayler.com)\
 July 2026
 
+[![Validate Autoinstall](https://github.com/asayler/ubuntu_autoinstall/actions/workflows/validate-autoinstall.yml/badge.svg)](https://github.com/asayler/ubuntu_autoinstall/actions/workflows/validate-autoinstall.yml)
+
 * **Ubuntu Server Version:** 26.04 (previously tested with 20.04, 22.04)
 * **Default Username:** `setup`
 * **Default Password:** `setup`
@@ -47,8 +49,18 @@ Notes
 -----
 * Generate Crypted Password: `openssl passwd -6`
 
+Validation
+----------
+Every `user-data-*` file is checked on push/PR by a
+[GitHub Actions workflow](.github/workflows/validate-autoinstall.yml) that
+runs Subiquity's own `validate-autoinstall-user-data.py` against it (see the
+[autoinstall validation howto](https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/autoinstall-validation.html)).
+This is not a local pre-commit check since the validator needs a full
+Subiquity checkout and `sudo apt-get install`-ed dependencies.
+
 References
 ----------
 * https://ubuntu.com/server/docs/install/autoinstall
 * https://ubuntu.com/server/docs/install/autoinstall-reference
 * https://curtin.readthedocs.io/en/latest/topics/storage.html
+* https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/autoinstall-validation.html

@@ -1,0 +1,39 @@
+name: Validate Autoinstall
+on:
+  push:
+    paths:
+      - 'user-data-*'
+      - '.github/workflows/validate-autoinstall.yml'
+  pull_request:
+    paths:
+      - 'user-data-*'
+      - '.github/workflows/validate-autoinstall.yml'
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v4
+        with:
+          path: repo
+      - name: Check out subiquity (26.04)
+        uses: actions/checkout@v4
+        with:
+          repository: canonical/subiquity
+          ref: '26.04'
+          path: subiquity
+      - name: Install subiquity dependencies
+        working-directory: subiquity
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y $(cat apt-deps.txt)
+          make gitdeps
+      - name: Validate autoinstall files
+        working-directory: repo
+        run: |
+          set -e
+          for f in user-data-*; do
+            echo "::group::Validating $f"
+            ../subiquity/scripts/validate-autoinstall-user-data.py "$f"
+            echo "::endgroup::"
+          done
