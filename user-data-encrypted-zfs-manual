@@ -1,0 +1,148 @@
+#cloud-config
+autoinstall:
+  version: 1
+  refresh-installer:
+    update: yes
+  early-commands:
+    - "printf '%s' 'setup' > /tmp/zpool-keyfile"
+  identity:
+    hostname: newserver
+    password: "$6$.SAlxBpn2Ch0I$dPF3313pydThKpTXoHH/2aebmxilJVkPSMXtE8ZDG4rQTakd2VQTNZHKCVYRcPvzzCF3DX49hQr114jKYo7De."
+    realname: 'setup'
+    username: setup
+  ssh:
+    install-server: yes
+    allow-pw: no
+    authorized-keys:
+      - "ADD KEY HERE"
+  storage:
+    config:
+      - id: disk-system
+        type: disk
+        match:
+          path: /dev/nvme0n1
+        ptable: gpt
+        wipe: superblock
+        name: system
+      - id: part-efi
+        type: partition
+        device: disk-system
+        number: 1
+        size: 1G
+        wipe: superblock
+        flag: boot
+        grub_device: true
+      - id: part-boot
+        type: partition
+        device: disk-system
+        number: 2
+        size: 2G
+        wipe: superblock
+      - id: part-root
+        type: partition
+        device: disk-system
+        number: 3
+        size: 32G
+        wipe: superblock
+      - id: format-efi
+        type: format
+        volume: part-efi
+        fstype: fat32
+        label: efi
+      - id: mount-efi
+        type: mount
+        device: format-efi
+        path: /boot/efi
+      - id: pool-boot
+        type: zpool
+        pool: bpool
+        vdevs:
+          - part-boot
+        mountpoint: /boot
+        default_features: false
+        pool_properties:
+          ashift: 12
+          autotrim: on
+          version: null
+          feature@async_destroy: enabled
+          feature@bookmarks: enabled
+          feature@embedded_data: enabled
+          feature@empty_bpobj: enabled
+          feature@enabled_txg: enabled
+          feature@extensible_dataset: enabled
+          feature@filesystem_limits: enabled
+          feature@hole_birth: enabled
+          feature@large_blocks: enabled
+          feature@lz4_compress: enabled
+          feature@spacemap_histogram: enabled
+        fs_properties:
+          acltype: posixacl
+          canmount: off
+          compression: lz4
+          devices: off
+          normalization: formD
+          relatime: on
+          sync: standard
+          xattr: sa
+      - id: bpool-boot
+        type: zfs
+        pool: pool-boot
+        volume: BOOT
+        properties:
+          canmount: off
+          mountpoint: none
+      - id: bpool-boot-ubuntu
+        type: zfs
+        pool: pool-boot
+        volume: BOOT/ubuntu
+        properties:
+          mountpoint: /boot
+      - id: pool-root
+        type: zpool
+        pool: rpool
+        vdevs:
+          - part-root
+        mountpoint: /
+        default_features: true
+        encryption_style: luks_keystore
+        keyfile: /tmp/zpool-keyfile
+        pool_properties:
+          ashift: 12
+          autotrim: on
+          version: null
+        fs_properties:
+          acltype: posixacl
+          canmount: off
+          compression: lz4
+          devices: off
+          dnodesize: auto
+          normalization: formD
+          relatime: on
+          sync: standard
+          xattr: sa
+      - id: rpool-root
+        type: zfs
+        pool: pool-root
+        volume: ROOT
+        properties:
+          canmount: off
+          mountpoint: none
+      - id: rpool-root-ubuntu
+        type: zfs
+        pool: pool-root
+        volume: ROOT/ubuntu
+        properties:
+          mountpoint: /
+      - id: rpool-userdata
+        type: zfs
+        pool: pool-root
+        volume: USERDATA
+        properties:
+          canmount: off
+          mountpoint: none
+      - id: rpool-userdata-home
+        type: zfs
+        pool: pool-root
+        volume: USERDATA/home
+        properties:
+          mountpoint: /home

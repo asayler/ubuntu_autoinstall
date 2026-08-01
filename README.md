@@ -24,13 +24,13 @@ Contents
   `user-data-encrypted` using the guided ZFS layout with native ZFS
   encryption instead of manual LUKS partitioning. **NOTE: Please
   change the encryption passphrase after first boot. Default
-  passphrase is above.**
+  passphrase is above.** (**UNTESTED**)
 * [user-data-encrypted-zfs-manual](user-data-encrypted-zfs-manual):
   Same encrypted-ZFS scheme as `user-data-encrypted-zfs`, but built
   from low-level `zpool`/`zfs` storage actions on a fixed partition
   layout instead of the guided layout. **NOTE: Please change the
   encryption passphrase after first boot. Default passphrase is
-  above.**
+  above.** (**UNTESTED**)
 
 Build
 -----
